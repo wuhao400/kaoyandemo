@@ -1,0 +1,41 @@
+#include <iostream>
+#include<stdio.h>
+#include <sstream>
+#include<regex>
+#include<string>
+using namespace std;
+void  test(string s)
+{
+	string out;
+	istringstream str(s); //字符串根据空格分割
+	while (str>>out)
+	{
+		cout << out << endl;
+
+	}
+}
+	int main()
+	{
+
+		string s = "  -251x41+(5-13/2)x3";
+		char a;
+		while ((a=cin.get())!='\n')
+		{
+			s.append(1, a);  //添加字符
+		}
+		//cin >> s;
+		regex pattern("\\d+");
+		smatch result;
+		string::const_iterator iter = s.cbegin();
+		string::const_iterator iter_end = s.cend();
+		while (regex_search(iter, iter_end, result, pattern))
+		{
+			int a = atoi(((string)result[0]).c_str());  //字符串化整型
+			cout << a+1 << endl;
+			iter = result[0].second;
+
+		}
+		
+		return 0;
+		
+	}
