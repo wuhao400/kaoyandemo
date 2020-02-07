@@ -1,0 +1,22 @@
+CString strFile;
+    GetDlgItem(IDC_EDIT_HTML)->GetWindowText(strFile);
+
+    ifstream file(strFile);
+    string strHtml;
+    stringstream ss;
+    ss<<file.rdbuf();   
+    file.close();
+    strHtml=ss.str();//读取html文件到字符串
+
+    std::regex_constants::syntax_option_type fl = std::regex_constants::icase;
+    const std::tr1::regex pattern("http://[^\\\"\\>\\<]+?\\.(png|jpg|bmp)",fl); 
+    std::tr1::smatch result;
+    std::string::const_iterator itS = strHtml.begin();
+    std::string::const_iterator itE = strHtml.end();
+    while(regex_search(itS,itE, result, pattern))//如果匹配成功
+    {
+        //m_clbRegex.AddString((CString)result[0].str().c_str()); 
+        m_clbRegex.AddString((CString)(string(result[0].first,result[0].second)).c_str());
+
+        itS=result[0].second;//新的位置开始匹配
+    }
