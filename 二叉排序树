@@ -1,0 +1,115 @@
+#include<iostream>
+#include<algorithm>
+#include<cstdio>
+using namespace std;
+bool Comp(int x, int y)
+{
+	return x > y;
+
+
+}  //sort
+struct BiTree
+{
+	int data;
+	BiTree *left;
+	BiTree *right;
+};
+bool BinarySearch(int a[], int n, int i)   //二分查找
+{
+	int left=0;
+	int right = n - 1;
+	int middle = (left + right) / 2;
+	while (left <= right)
+	{
+		middle = (left + right) / 2;
+		if (a[middle] < i)
+			left = middle + 1;
+		else if (a[middle] > i)  right = middle - 1;
+		else
+			return true;
+	
+	
+	
+	}
+	return false;
+
+}
+void insert(BiTree *&p,int n)     //二叉排序树构建，插入
+{
+	
+	if (p == NULL)
+	{
+		p = new BiTree();
+		p->data = n;
+		p->left = NULL;
+		p->right = NULL;
+		
+
+	}
+	else if (p->data == n) return;
+	else if (p->data < n)  insert(p->right, n);
+	else if(p->data >n)insert(p->left, n);
+	
+
+
+
+}
+void preOrder(BiTree *p)  //前序遍历
+{
+	if (p != NULL)
+	{
+		cout << p->data << " ";
+		preOrder(p->left);
+		preOrder(p->right);
+	}
+
+}
+void midOrder(BiTree *p)    //中序遍历
+{
+	if (p != NULL)
+	{
+		midOrder(p->left);
+		cout << p->data << " ";
+		
+		midOrder(p->right);
+	}
+
+}
+void reOrder(BiTree *p)    //后序遍历
+{
+	if (p != NULL)
+	{
+		reOrder(p->left);
+		
+
+		reOrder(p->right);
+		cout << p->data << " ";
+	}
+
+}
+int main()
+{
+	
+	int n; 
+	int a[100];
+	BiTree *p = NULL;
+	
+	while (cin >> n)
+	{
+		
+		p = NULL;
+		for (int i = 0; i < n; i++)
+		{
+			cin >> a[i];
+		}
+		for (int i = 0; i < n; i++)
+			insert(p, a[i]);
+		preOrder(p);
+		cout << endl;
+		midOrder(p);
+		cout << endl;
+		reOrder(p);
+		cout << endl;    //多个用例，记住最后加换行
+
+	}
+}
