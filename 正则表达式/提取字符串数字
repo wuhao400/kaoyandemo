@@ -1,0 +1,77 @@
+#include<iostream>
+#include<stdio.h>
+#include<string>
+#include<regex>
+using namespace std;
+void BubbleSort(int arr[], int n)
+
+{
+
+	for (int i = 0; i < n - 1; i++)
+
+	{
+
+		for (int j = 0; j < n - i - 1; j++)
+
+		{
+
+			if (arr[j] > arr[j + 1])
+
+			{
+
+				int temp = arr[j];
+
+				arr[j] = arr[j + 1];
+
+				arr[j + 1] = temp;
+
+			}
+
+		}
+
+	}
+
+}
+int main()
+{
+	
+	string s = "  -251x41+(5-13/2)x3";
+	cin >> s;
+	regex pattern("\\d+");
+	smatch result;
+	int num[100];
+	int sum = 0;
+	string::const_iterator iter = s.cbegin();
+	string::const_iterator iter_end = s.cend();
+	while (regex_search(iter, iter_end, result, pattern))
+	{    
+		string a = result[0];
+		num[sum]=atoi(a.c_str());
+		sum++;
+	//	cout << "查找成功：" << a[sum]<< endl;
+		iter = result[0].second;
+
+	}
+	if (sum==0)
+	{
+		cout << 0;
+	}
+	else
+	{
+		int flag = 0;
+		BubbleSort(num, sum);
+		for (int i = 0; i < sum; i++)
+			if (flag==0)
+			{
+				cout << num[i] ;
+				flag = 1;
+			}
+			else
+			{
+				cout << "," << num[i];
+			}
+	}
+	return 0;
+
+
+} 
