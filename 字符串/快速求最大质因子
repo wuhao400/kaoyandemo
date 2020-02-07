@@ -1,0 +1,30 @@
+int judge(int n)     //用因子再求最大质因子
+{
+	int res;
+	int i = 2;
+	if (n == 2)
+		res = 2;
+	else
+	{
+		while (n > 2)
+		{
+
+			if (n%i == 0)
+			{
+				res = i;
+				n = n / i;
+
+			}
+			else
+				i++;
+
+
+
+		}
+
+
+
+
+	}
+	return res;
+}
