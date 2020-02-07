@@ -1,0 +1,30 @@
+#include <iostream>
+#include <sstream>
+using namespace std;
+
+int main() {
+	string s;
+	char c;
+	while ((c=cin.get())!='.')
+	{
+		s.append(1, c);
+	}
+	istringstream str(s);
+	
+	string out;
+	string st[500];
+	int i = 0;
+	while (str >> out) {
+		st[i++] = out;
+		//cout <<out << endl;
+	}
+	string model=st[0];
+	int max = st[0].size();
+	for (int j = 0; j < i; j++)
+		if (st[j].size() > max)
+		{
+			model = st[j];
+			max = st[j].size();
+		}
+	cout <<model;
+}
